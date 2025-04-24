@@ -6,30 +6,59 @@
         xmlns:models="clr-namespace:LogManagerApp.Models"
         x:Class="LogManagerApp.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Title="Log Manager" Width="500" Height="400">
+        Title="Log Manager" Width="700" Height="500">
 
 	<Design.DataContext>
 		<vm:MainWindowViewModel />
 	</Design.DataContext>
 
 	<StackPanel Margin="10" Spacing="10">
-		<!-- Используем Types из ViewModel -->
+
+		<!-- ComboBox выбора типа -->
 		<ComboBox ItemsSource="{Binding Types}"
                   SelectedItem="{Binding SelectedType}"
                   Width="150" />
 
+		<!-- Кнопки -->
 		<StackPanel Orientation="Horizontal" Spacing="10">
 			<Button Content="Add" Command="{Binding AddMessageCommand}" />
 			<Button Content="Filter" Command="{Binding FilterByTypeCommand}" />
 			<Button Content="Save" Command="{Binding SaveToFileCommand}" />
 		</StackPanel>
 
-		<ListBox ItemsSource="{Binding Messages}" Height="250">
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding Text}" />
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
+		<!-- Фильтрация по времени -->
+		<StackPanel Orientation="Vertical" Spacing="5">
+			<TextBlock Text="Start Time:"/>
+			<StackPanel Orientation="Horizontal" Spacing="10">
+				<DatePicker SelectedDate="{Binding FilterStartDate}" Width="300"/>
+				<TimePicker SelectedTime="{Binding FilterStartTime}" Width="300"/>
+			</StackPanel>
+
+			<TextBlock Text="End Time:"/>
+			<StackPanel Orientation="Horizontal" Spacing="10">
+				<DatePicker SelectedDate="{Binding FilterEndDate}" Width="300"/>
+				<TimePicker SelectedTime="{Binding FilterEndTime}" Width="300"/>
+			</StackPanel>
+
+			<Button Content="Filter by Time" Command="{Binding FilterByTimeCommand}" Margin="0,5,0,0"/>
+			</StackPanel>
+
+
+		<!-- Список сообщений -->
+		<ScrollViewer Height="250" VerticalScrollBarVisibility="Auto">
+			<ListBox ItemsSource="{Binding Messages}" Height="250">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Orientation="Vertical" Margin="0,4">
+							<TextBlock FontWeight="Bold" Foreground="DarkSlateBlue"
+									   Text="{Binding Type}" />
+							<TextBlock FontStyle="Italic" FontSize="11" Foreground="Gray"
+									   Text="{Binding Timestamp, StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}'}" />
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</ScrollViewer>
+
 	</StackPanel>
 </Window>

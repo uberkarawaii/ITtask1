@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using LogManagerApp.Models;
 
 namespace LogManagerApp.Models
 {
@@ -19,18 +20,15 @@ namespace LogManagerApp.Models
             return _messages.Where(m => m.Type == type);
         }
 
-        public IEnumerable<LogMessage> GetByTimeRange(DateTime from, DateTime to)
+        public void SaveToFile(string path)
         {
-            return _messages.Where(m => m.Timestamp >= from && m.Timestamp <= to);
+            var lines = _messages.Select(m => $"[{m.Timestamp:yyyy-MM-dd HH:mm:ss}] {m.Type}");
+            File.WriteAllLines(path, lines);
         }
 
-        public void SaveToFile(string filePath)
+        public IEnumerable<LogMessage> GetAll()
         {
-            using StreamWriter writer = new(filePath);
-            foreach (var msg in _messages)
-            {
-                writer.WriteLine($"[{msg.Timestamp}] {msg.Type}: {msg.Text}");
-            }
+            return _messages;
         }
     }
 }

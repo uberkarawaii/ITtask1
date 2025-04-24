@@ -138,3 +138,4 @@ C:\Users\User\Desktop\vsu\6sem\InfoTech\LogManagerApp\obj\Debug\net9.0\refint\Av
 C:\Users\User\Desktop\vsu\6sem\InfoTech\LogManagerApp\obj\Debug\net9.0\LogManag.D00E3688.Up2Date
 C:\Users\User\Desktop\vsu\6sem\InfoTech\LogManagerApp\obj\Debug\net9.0\LogManagerApp.genruntimeconfig.cache
 C:\Users\User\Desktop\vsu\6sem\InfoTech\LogManagerApp\obj\Debug\net9.0\ref\LogManagerApp.dll
+C:\Users\User\Desktop\vsu\6sem\InfoTech\LogManagerApp\obj\Debug\net9.0\LogManagerApp.sourcelink.json
