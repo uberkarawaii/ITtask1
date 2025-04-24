@@ -17,9 +17,13 @@ namespace LogManagerApp.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
+        //неизменияемый список сообщений
         private readonly LogManager _logManager = new();
+        
+        //для открытия диалогового окна для сохранения файла
         public Interaction<Unit, string?> SaveFileDialogInteraction { get; } = new();
 
+        //4 метки для фильтров времени
         [ObservableProperty]
         private DateTimeOffset? filterStartDate = DateTimeOffset.Now.Date;
 
@@ -32,13 +36,17 @@ namespace LogManagerApp.ViewModels
         [ObservableProperty]
         private TimeSpan filterEndTime = DateTime.Now.TimeOfDay;
 
+        //перечилсение для выбора типа сообщения (выпадающий список)
         public IEnumerable<LogMessageType> Types => Enum.GetValues<LogMessageType>();
 
+        //все сообщения отражаемые снизу
         public ObservableCollection<LogMessage> Messages { get; } = new();
 
+        //то, что было выбрано в выпадающем окошке
         [ObservableProperty]
         private LogMessageType selectedType = LogMessageType.Info;
 
+        //для всех функций по кнопкам
         public IRelayCommand AddMessageCommand { get; }
         public IRelayCommand FilterByTypeCommand { get; }
         public IRelayCommand SaveToFileCommand { get; }

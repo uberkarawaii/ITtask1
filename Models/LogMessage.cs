@@ -9,8 +9,6 @@ namespace LogManagerApp.Models
     }
 }
 
-// ===== LogMessage.cs =====
-
 namespace LogManagerApp.Models
 {
     public struct LogMessage
